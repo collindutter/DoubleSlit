@@ -1,4 +1,5 @@
 ArrayList<LightWave> waves;
+LightSource light;
 
 void setup() {
     size(600, 400, P2D);
@@ -7,6 +8,7 @@ void setup() {
 
 void init() {
     waves = new ArrayList<LightWave>();
+    light = new LightSource();
 }
 
 void draw() {
@@ -19,5 +21,9 @@ void draw() {
             ndx--;
         }
     }
+    light.render();
 }
 
+void addWave() {
+    waves.add(new LightWave());
+}
