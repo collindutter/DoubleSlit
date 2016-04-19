@@ -1,14 +1,23 @@
 public class Wall {
-    ArrayList<WallPiece> pieces;
+    private ArrayList<WallPiece> pieces;
+    private int wallHeight, wallWidth;
+    private PVector pos;
+    private int topSlit, botSlit;
 
-    public Wall(PVector p, int h, int slitGap) {
+    public Wall(PVector p, int slitDiff) {
         pos = p; 
-        wallHeight = h;
+        wallHeight = height;
         wallWidth = 20;
+        int gapSize = 25;
         pieces = new ArrayList<WallPiece>();
-        pieces.add(new WallPiece(height / 2 - gap - gap /2));
-        pieces.add(new WallPiece(height / 2 - gap / 2), gap);
-        pieces.add(new WallPiece(height /2 + gap + gap / 2), height / 2 - gap + gap / 2);
+        int midStart = height / 2 - slitDiff / 2 + gapSize / 2;
+        int midEnd = midStart + slitDiff - gapSize;
+        topSlit = midStart - gapSize / 2;
+        botSlit = midEnd + gapSize / 2;
+
+        pieces.add(new WallPiece(0, midStart - gapSize));
+        pieces.add(new WallPiece(midStart, slitDiff - gapSize));
+        pieces.add(new WallPiece(midEnd + gapSize, height - midEnd - gapSize));
     }
 
     public void render() {
@@ -18,6 +27,14 @@ public class Wall {
 
     public int getWidth() {
         return wallWidth;
+    }
+
+    public int topSlit() {
+        return topSlit;
+    }
+
+    public int botSlit() {
+        return botSlit;
     }
 
     public PVector pos() {

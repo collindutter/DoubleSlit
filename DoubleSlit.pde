@@ -9,9 +9,8 @@ void setup() {
 
 void init() {
     waves = new ArrayList<LightWave>();
-    walls = new ArrayList<Wall>();
     light = new LightSource();
-    wall = new Wall();
+    wall = new Wall(new PVector(width / 3, 0), 100);
 }
 
 void draw() {
@@ -24,10 +23,7 @@ void draw() {
             ndx--;
         }
     }
-
-    for (Wall wall : walls) {
-        wall.render();
-    }
+    wall.render();
     light.render();
 
     fill(255);
@@ -47,8 +43,8 @@ void addWave(PVector wavePos, float rot) {
 boolean collidesWithWall(PVector pos) {
     if (pos.x >= wall.pos().x + wall.getWidth() &&
             pos.x < wall.pos().x + wall.getWidth() + 3) {
-        addWave(new PVector(wall.pos().x + wall.getWidth() + 3, pos.y + 25), -PI / 12);
-        addWave(new PVector(wall.pos().x + wall.getWidth() + 3, pos.y - 25), PI / 12);
+        addWave(new PVector(wall.pos().x + wall.getWidth() + 3, wall.botSlit()), -PI / 12);
+        addWave(new PVector(wall.pos().x + wall.getWidth() + 3, wall.topSlit()), PI / 12);
         return true;
     }
     return false;
