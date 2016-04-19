@@ -1,5 +1,5 @@
 ArrayList<LightWave> waves;
-ArrayList<Wall> walls;
+Wall wall;
 LightSource light;
 
 void setup() {
@@ -11,11 +11,7 @@ void init() {
     waves = new ArrayList<LightWave>();
     walls = new ArrayList<Wall>();
     light = new LightSource();
-
-    int gap = 20;
-    walls.add(new Wall(new PVector(width / 3, 0), height / 2 - gap - gap /2));
-    walls.add(new Wall(new PVector(width / 3, height / 2 - gap / 2), gap));
-    walls.add(new Wall(new PVector(width / 3, height /2 + gap + gap / 2), height / 2 - gap + gap / 2));
+    wall = new Wall();
 }
 
 void draw() {
@@ -49,12 +45,11 @@ void addWave(PVector wavePos, float rot) {
 }
 
 boolean collidesWithWall(PVector pos) {
-    for (Wall wall : walls)
-        if (pos.x >= wall.pos().x + wall.getWidth() &&
-                pos.x < wall.pos().x + wall.getWidth() + 3) {
-            addWave(new PVector(wall.pos().x + wall.getWidth() + 3, pos.y + 25), -PI / 12);
-            addWave(new PVector(wall.pos().x + wall.getWidth() + 3, pos.y - 25), PI / 12);
-            return true;
-        }
+    if (pos.x >= wall.pos().x + wall.getWidth() &&
+            pos.x < wall.pos().x + wall.getWidth() + 3) {
+        addWave(new PVector(wall.pos().x + wall.getWidth() + 3, pos.y + 25), -PI / 12);
+        addWave(new PVector(wall.pos().x + wall.getWidth() + 3, pos.y - 25), PI / 12);
+        return true;
+    }
     return false;
 }
