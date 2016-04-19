@@ -3,9 +3,8 @@ public class LightSource {
     }
 
     public boolean render() {
-        if (frameCount % 60 == 0) {
-            addWave();
-        }
+        if (frameCount % 10 == 0)
+            addWave(new PVector(0, height / 2));
         return true;
     }
 }

@@ -12,9 +12,10 @@ void init() {
     walls = new ArrayList<Wall>();
     light = new LightSource();
 
-    walls.add(new Wall(new PVector(width / 3, 0), height / 2 - 75));
-    walls.add(new Wall(new PVector(width / 3, height / 2 - 25), 50));
-    walls.add(new Wall(new PVector(width / 3, height /2 + 75), height / 2 - 75));
+    int gap = 20;
+    walls.add(new Wall(new PVector(width / 3, 0), height / 2 - gap - gap /2));
+    walls.add(new Wall(new PVector(width / 3, height / 2 - gap / 2), gap));
+    walls.add(new Wall(new PVector(width / 3, height /2 + gap + gap / 2), height / 2 - gap + gap / 2));
 }
 
 void draw() {
@@ -32,9 +33,28 @@ void draw() {
         wall.render();
     }
     light.render();
+
+    fill(255);
+    line(width / 3, height / 2 - 20, width, height / 4);
+    fill(128);
+    rect(width * 7 / 8, 0, width * 1 / 8, height);
 }
 
+void addWave(PVector wavePos) {
+    waves.add(new LightWave(wavePos));
+}
 
-void addWave() {
-    waves.add(new LightWave());
+void addWave(PVector wavePos, float rot) {
+    waves.add(new LightWave(wavePos, rot));
+}
+
+boolean collidesWithWall(PVector pos) {
+    for (Wall wall : walls)
+        if (pos.x >= wall.pos().x + wall.getWidth() &&
+                pos.x < wall.pos().x + wall.getWidth() + 3) {
+            addWave(new PVector(wall.pos().x + wall.getWidth() + 3, pos.y + 25), -PI / 12);
+            addWave(new PVector(wall.pos().x + wall.getWidth() + 3, pos.y - 25), PI / 12);
+            return true;
+        }
+    return false;
 }
