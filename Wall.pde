@@ -3,9 +3,11 @@ public class Wall {
     private int wallHeight, wallWidth;
     private PVector pos;
     private int topSlit, botSlit;
+    private int slitDiff;
 
-    public Wall(PVector p, int slitDiff) {
+    public Wall(PVector p, int sd) {
         pos = p; 
+        slitDiff = sd;
         wallHeight = height;
         wallWidth = 20;
         int gapSize = 25;
@@ -35,6 +37,10 @@ public class Wall {
 
     public int botSlit() {
         return botSlit;
+    }
+
+    public int slitDiff() {
+        return slitDiff;
     }
 
     public PVector pos() {

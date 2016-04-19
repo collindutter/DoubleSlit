@@ -5,20 +5,24 @@ public class LightWave {
     private float waveWidth;
     private float rot;
 
-    public LightWave(PVector p) {
-        pos = p;
-        vel = new PVector(2 * cos(0), sin(0));
+    public LightWave() {
+        pos = new PVector(0, height / 2);
+        vel = new PVector(2, 0);
         waveMag = 50;
         waveWidth = 25;
         rot = 0;
     }
 
-    public LightWave(PVector p, float r) {
+    public LightWave(PVector p, int sign) {
         pos = p;
-        vel = new PVector(2 * cos(r), sin(r));
         waveMag = 50;
         waveWidth = 25;
-        rot = r;
+
+        float x = endWallX - wall.pos().x + wall.getWidth() / 2;
+        float dy = (50 * x)/ wall.slitDiff();
+        rot = sign * atan2(dy, x);
+
+        vel = new PVector(cos(rot), sign * sin(rot));
     }
     
     public boolean render() {
