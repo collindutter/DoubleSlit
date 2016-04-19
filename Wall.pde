@@ -22,4 +22,9 @@ public class Wall {
     public PVector pos() {
         return pos.copy();
     }
+
+    private class WallPiece {
+        public WallPiece() {
+        }
+    }
 }
