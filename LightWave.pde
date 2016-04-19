@@ -14,8 +14,8 @@ public class LightWave {
     public boolean render() {
         pos.add(vel);
         drawWave();
-        waveMag += .5;
-        waveWidth += .25;
+        waveMag += 2; 
+        waveWidth += 1;
         if (pos.x > width)
             return false;
         return true;
