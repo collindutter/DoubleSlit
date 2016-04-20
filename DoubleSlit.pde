@@ -36,15 +36,16 @@ void addWave() {
     waves.add(new LightWave());
 }
 
-void addWave(PVector wavePos, int sign) {
+void addWave(PVector wavePos, float sign) {
     waves.add(new LightWave(wavePos, sign));
 }
 
-boolean collidesWithWall(PVector pos) {
-    if (pos.x >= wall.pos().x + wall.getWidth() &&
-            pos.x < wall.pos().x + wall.getWidth() + 3) {
-        addWave(new PVector(wall.pos().x + wall.getWidth() + 3, wall.botSlit()), -1);
-        addWave(new PVector(wall.pos().x + wall.getWidth() + 3, wall.topSlit()), 1);
+boolean collidesWithWall(LightWave w) {
+    if (w.fancy)
+        return false;
+    if (w.pos.x + w.waveWidth / 2 >= wall.pos().x + wall.getWidth() / 2 && w.pos.x < wall.pos().x + wall.getWidth() / 2) {
+        addWave(new PVector(wall.pos().x, wall.botSlit()), 1.0);
+        addWave(new PVector(wall.pos().x, wall.topSlit()), 1.0);
         return true;
     }
     return false;

@@ -2,44 +2,47 @@ public class Wall {
     private ArrayList<WallPiece> pieces;
     private int wallHeight, wallWidth;
     private PVector pos;
-    private int topSlit, botSlit;
-    private int slitDiff;
+    private float topSlit, botSlit;
+    private float slitDiff;
 
-    public Wall(PVector p, int sd) {
+    public Wall(PVector p, float sd) {
         pos = p; 
         slitDiff = sd;
         wallHeight = height;
-        wallWidth = 20;
-        int gapSize = 25;
+        wallWidth = 40;
         pieces = new ArrayList<WallPiece>();
-        int midStart = height / 2 - slitDiff / 2 + gapSize / 2;
-        int midEnd = midStart + slitDiff - gapSize;
-        topSlit = midStart - gapSize / 2;
-        botSlit = midEnd + gapSize / 2;
 
-        pieces.add(new WallPiece(0, midStart - gapSize));
-        pieces.add(new WallPiece(midStart, slitDiff - gapSize));
-        pieces.add(new WallPiece(midEnd + gapSize, height - midEnd - gapSize));
+        int gapSize = 25;
+        float midStart = (height / 2.0) - (slitDiff / 2.0) + (gapSize / 2.0);
+        float midEnd = midStart + slitDiff - gapSize;
+        topSlit = midStart - gapSize / 2.0;
+        botSlit = midEnd + gapSize / 2.0;
+
+        pieces.add(new WallPiece(0, midStart - gapSize)); // top
+        pieces.add(new WallPiece(midStart, slitDiff - gapSize)); // mid
+        pieces.add(new WallPiece(midEnd + gapSize, height - midEnd - gapSize)); // bot
+        println(topSlit - botSlit, sd);
     }
 
     public void render() {
+        fill(#ff0000);
         for (WallPiece piece : pieces)
             piece.render();
     }
 
-    public int getWidth() {
+    public float getWidth() {
         return wallWidth;
     }
 
-    public int topSlit() {
+    public float topSlit() {
         return topSlit;
     }
 
-    public int botSlit() {
+    public float botSlit() {
         return botSlit;
     }
 
-    public int slitDiff() {
+    public float slitDiff() {
         return slitDiff;
     }
 
@@ -49,10 +52,10 @@ public class Wall {
 
     private class WallPiece {
         public PVector pos;
-        public int pieceHeight;
-        public int pieceWidth;
+        public float pieceHeight;
+        public float pieceWidth;
 
-        public WallPiece(int y, int pHeight) {
+        public WallPiece(float y, float pHeight) {
             pos = new PVector(Wall.this.pos.x, y);
             pieceWidth = Wall.this.wallWidth;
             pieceHeight = pHeight;
