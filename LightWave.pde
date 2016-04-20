@@ -22,7 +22,7 @@ public class LightWave {
         waveWidth = 25;
 
         float x = endWallX - (wall.pos().x + wall.getWidth() / 2.0);
-        float dy = (sign * x)/ wall.slitDiff();
+        float dy = (sign * 1 * x)/ wall.slitDiff();
         rot = atan2(dy, x);
 
         vel = new PVector(SPEED * cos(rot), SPEED * sin(rot));

@@ -44,7 +44,7 @@ boolean collidesWithWall(LightWave w) {
     if (w.fancy)
         return false;
     if (w.pos.x + w.waveWidth / 2 >= wall.pos().x + wall.getWidth() / 2 && w.pos.x < wall.pos().x + wall.getWidth() / 2) {
-        addWave(new PVector(wall.pos().x, wall.botSlit()), 1.0);
+        addWave(new PVector(wall.pos().x, wall.botSlit()), -1.0);
         addWave(new PVector(wall.pos().x, wall.topSlit()), 1.0);
         return true;
     }

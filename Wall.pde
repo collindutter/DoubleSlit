@@ -9,7 +9,7 @@ public class Wall {
         pos = p; 
         slitDiff = sd;
         wallHeight = height;
-        wallWidth = 40;
+        wallWidth = 20;
         pieces = new ArrayList<WallPiece>();
 
         int gapSize = 25;
@@ -21,7 +21,6 @@ public class Wall {
         pieces.add(new WallPiece(0, midStart - gapSize)); // top
         pieces.add(new WallPiece(midStart, slitDiff - gapSize)); // mid
         pieces.add(new WallPiece(midEnd + gapSize, height - midEnd - gapSize)); // bot
-        println(topSlit - botSlit, sd);
     }
 
     public void render() {
