@@ -36,7 +36,7 @@ public class LightWave {
         waveWidth += 2;
         if (collidesWithWall(this))//new PVector(pos.x + waveWidth / 2, pos.y)))
             return false;
-        if (pos.x > width)
+        if (offScreen(pos.copy()))
             return false;
         return true;
     }

@@ -3,8 +3,10 @@ public class LightSource {
     }
 
     public boolean render() {
-        if (frameCount % 10 == 0)
-            addWave();
+        if (frameCount % 1 == 0) {
+            addPhoton();
+            //addWave();
+        }
         return true;
     }
 }

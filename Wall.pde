@@ -4,6 +4,7 @@ public class Wall {
     private PVector pos;
     private float topSlit, botSlit;
     private float slitDiff;
+    private float gapSize;
 
     public Wall(PVector p, float sd) {
         pos = p; 
@@ -12,7 +13,7 @@ public class Wall {
         wallWidth = 20;
         pieces = new ArrayList<WallPiece>();
 
-        int gapSize = 25;
+        gapSize = 50;
         float midStart = (height / 2.0) - (slitDiff / 2.0) + (gapSize / 2.0);
         float midEnd = midStart + slitDiff - gapSize;
         topSlit = midStart - gapSize / 2.0;
@@ -47,6 +48,12 @@ public class Wall {
 
     public PVector pos() {
         return pos.copy();
+    }
+    
+    public boolean inSlit(PVector pos) {
+        float halfGap = gapSize / 2.0;
+        return (pos.y > topSlit - halfGap && pos.y < topSlit + halfGap) ||
+            (pos.y > botSlit - halfGap && pos.y < botSlit + halfGap);
     }
 
     private class WallPiece {
