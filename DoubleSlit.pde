@@ -69,3 +69,7 @@ boolean collidesWithWall(LightWave w) {
     }
     return false;
 }
+
+void mousePressed() {
+    light.toggleEmission();
+}
