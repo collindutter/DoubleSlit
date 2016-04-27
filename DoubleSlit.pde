@@ -2,7 +2,9 @@ ArrayList<LightWave> waves;
 ArrayList<Photon> photons;
 Wall wall;
 LightSource light;
+boolean lightMiddle;
 int endWallX;
+long lastLight;
 
 void setup() {
     size(600, 400, P2D);
@@ -15,6 +17,8 @@ void init() {
     light = new LightSource();
     wall = new Wall(new PVector(width * 2 / 8, 0), 100);
     endWallX = width * 7 / 8;
+    lightMiddle = false;
+    lastLight = millis();
 }
 
 void draw() {
@@ -39,6 +43,20 @@ void draw() {
 
     fill(128);
     rect(endWallX, 0, width * 1 / 8, height);
+    if (lightMiddle) {
+        fill(#ffff00);
+        noStroke();
+        rectMode(CENTER);
+        rect(endWallX, height / 2, 6, 30);
+        rect(endWallX, height / 2 - height / 2.7f, 6, 30);
+        rect(endWallX, height / 2 + height / 2.7f, 6, 30);
+        rectMode(CORNER);
+    }
+
+    if (millis() - lastLight > 100) {
+        lastLight = millis();
+        lightMiddle = false;
+    }
 }
 
 boolean offScreen(PVector pos) {
@@ -46,6 +64,9 @@ boolean offScreen(PVector pos) {
         || pos.y < -15 || pos.y > height + 15;
 }
 
+boolean pastWall(PVector pos) {
+    return pos.x > endWallX;
+}
 
 void addWave() {
     waves.add(new LightWave());

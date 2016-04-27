@@ -5,6 +5,7 @@ public class LightSource {
     }
 
     public boolean render() {
+        drawLightSource();
         if (firePhoton) {
             if (frameCount % 1 == 0)
                 addPhoton();
@@ -23,5 +24,10 @@ public class LightSource {
             else
                 photons.get(ndx).setWallPass();
         firePhoton = !firePhoton;
+    }
+
+    private void drawLightSource() {
+        fill(#ffff00);
+        ellipse(15, height / 2, 30, 30);
     }
 }

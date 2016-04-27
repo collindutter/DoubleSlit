@@ -7,7 +7,7 @@ public class Photon {
 
     public Photon() {
         vel = new PVector(random(2, 3), random(-2, 2));
-        pos = new PVector(0, height / 2);
+        pos = new PVector(15, height / 2);
         radius = 3;
         hitWall = false;
         passWall = false;

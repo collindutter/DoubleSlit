@@ -6,14 +6,18 @@ public class LightWave {
     private float rot;
     private final int SPEED = 2;
     public boolean fancy;
+    private boolean collided;
+    public boolean lastWave;
 
     public LightWave() {
-        pos = new PVector(0, height / 2);
+        pos = new PVector(15, height / 2);
         vel = new PVector(SPEED, 0);
         waveMag = 50;
         waveWidth = 25;
         rot = 0;
         fancy = false;
+        collided = false;
+        lastWave = false;
     }
 
     public LightWave(PVector p, float sign) {
@@ -34,10 +38,16 @@ public class LightWave {
         drawWave();
         waveMag += 4; 
         waveWidth += 2;
-        if (collidesWithWall(this))//new PVector(pos.x + waveWidth / 2, pos.y)))
+        if (collidesWithWall(this))
             return false;
-        if (offScreen(pos.copy()))
+        if (pos.x + waveWidth / 2 > endWallX && !collided) {
+            lightMiddle = true;
+            collided = true;
+        }
+        if (pos.x > endWallX) {
             return false;
+        }
+
         return true;
     }
 
